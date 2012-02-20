@@ -1,17 +1,17 @@
 require 'spec_helper'
-require 'payroll_core/employee/add_employee'
-require 'payroll_core/employee/employee'
-require 'payroll_core/payment_classification/hourly'
-require 'payroll_core/error/validation_error'
+require 'payroll/employee/interactor/create'
+require 'payroll/employee/employee'
+require 'payroll/payment_classification/hourly'
+require 'payroll/error/validation_error'
 
 describe EmployeesController do
 
   context 'create' do
 
     it 'creates an employee and returns the json representation' do
-      pc = PaymentClassification::Hourly.new(25, '50')
-      emp = Employee::Employee.new(31, 'Jim', '123 Sweet St.', pc)
-      Employee::AddEmployee.any_instance.should_receive(:execute).and_return(emp)
+      pc = Payroll::PaymentClassification::Hourly.new(25, '50')
+      emp = Payroll::Employee::Employee.new(31, 'Jim', '123 Sweet St.', pc)
+      Payroll::Employee::Interactor::Create.any_instance.should_receive(:execute).and_return(emp)
       pc_hash = {'type' => 'hourly', 'rate' => pc.rate}
       emp_hash = {'name' => emp.name, 'address' => emp.address, 'payment_classification' => pc_hash}
       post :create, :employee => emp_hash
@@ -23,7 +23,7 @@ describe EmployeesController do
 
     it 'upon a validation error returns the original request with an errors key appended' do
       errors = {'yo_mamma_said' => 'not enough cool aid'}
-      Employee::AddEmployee.any_instance.should_receive(:execute).and_raise(ValidationError.new(errors))
+      Payroll::Employee::Interactor::Create.any_instance.should_receive(:execute).and_raise(Payroll::Error::ValidationError.new(errors))
       pc_hash = {'type' => 'hourly', 'rate' => '50'}
       emp_hash = {'name' => 'Jimmy', 'address' => 'The Louve', 'payment_classification' => pc_hash}
       post :create, :employee => emp_hash
@@ -34,7 +34,7 @@ describe EmployeesController do
 
     it 'handles nil input' do 
       errors = {'yo_mamma_said' => 'not enough cool aid'}
-      Employee::AddEmployee.any_instance.should_receive(:execute).and_raise(ValidationError.new(errors))
+      Payroll::Employee::Interactor::Create.any_instance.should_receive(:execute).and_raise(Payroll::Error::ValidationError.new(errors))
       post :create
       json_response = JSON.parse(response.body)
       json_response.should include('errors')

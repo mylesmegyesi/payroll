@@ -1,4 +1,4 @@
-require 'in_memory/transaction/factory'
+require 'in_memory/transaction_factory'
 
 Payroll::Application.configure do
 
@@ -7,4 +7,4 @@ Payroll::Application.configure do
 
 end
 
-TRANSACTION_FACTORY = Transaction::Factory.new
+TRANSACTION_FACTORY = InMemory::TransactionFactory.new

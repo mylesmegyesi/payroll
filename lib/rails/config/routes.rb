@@ -1,4 +1,4 @@
-Core::Application.routes.draw do
+Payroll::Application.routes.draw do
 
   resources :employees, :only => [:create]
 

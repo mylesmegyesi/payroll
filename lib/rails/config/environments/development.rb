@@ -1,7 +1,8 @@
-require 'data_store/in_memory/transaction/factory'
+require 'data_store/in_memory/transaction_factory'
 
-Core::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
+TRANSACTION_FACTORY = DataStore::InMemory::TransactionFactory.new
+
+Payroll::Application.configure do
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -22,5 +23,3 @@ Core::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
 end
-
-TRANSACTION_FACTORY = Transaction::Factory.new

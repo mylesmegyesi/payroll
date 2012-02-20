@@ -1,4 +1,4 @@
-Core::Application.configure do
+Payroll::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = true

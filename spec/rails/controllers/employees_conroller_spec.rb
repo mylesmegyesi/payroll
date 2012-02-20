@@ -45,7 +45,27 @@ describe EmployeesController do
 
   context 'delete' do
   
-    it 'deletes an employee' do
+    it 'deletes an employee and returns success' do
+      pc_hash = {:type => 'hourly', :rate => '50'}
+      emp_hash = {:name => 'name', :address => 'address', :payment_classification => pc_hash}
+      create = Core::Employee::Interactor::Create.new(TRANSACTION_FACTORY)
+      emp = create.execute(emp_hash)
+      delete :destroy, :id => emp.id
+      TRANSACTION_FACTORY.create(:find_employee_by_id).execute(emp.id).should be_nil
+      json_response = JSON.parse(response.body)
+      json_response.should == {'success' => true}
+    end
+
+    it 'returns a failure when record not found' do
+      delete :destroy, :id => 0
+      json_response = JSON.parse(response.body)
+      json_response['success'].should == false
+    end
+
+    it 'returns a message key with an error message' do
+      delete :destroy, :id => 0
+      json_response = JSON.parse(response.body)
+      json_response['message'].should_not be_nil 
     end
 
   end

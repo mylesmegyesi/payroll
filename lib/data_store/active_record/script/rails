@@ -1,0 +1,2 @@
+APP_PATH = File.expand_path('../../config/fake_application',  __FILE__)
+require 'rails/commands'

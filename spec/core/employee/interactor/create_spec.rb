@@ -21,7 +21,7 @@ describe Core::Employee::Interactor::Create do
         :name => 'Jim Bob',
         :address => '123 sweet St',
         :payment_classification => {
-          :type => 'hourly',
+          :classification => 'hourly',
           :rate => '8.25'
         }
       }

@@ -1,0 +1,5 @@
+desc 'Starts the server'
+task :server do
+  sh 'bundle exec unicorn_rails -I ..'
+end
+

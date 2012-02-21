@@ -14,7 +14,7 @@ describe Core::PaymentClassification::Hourly do
 
   it 'converts itself to a hash' do
     pc = Core::PaymentClassification::Hourly.new(1, 10)
-    pc.to_hash.should == {:type => 'hourly', :id => 1, :rate => 10}
+    pc.to_hash.should == {:classification => 'hourly', :id => 1, :rate => 10}
   end
 
 end

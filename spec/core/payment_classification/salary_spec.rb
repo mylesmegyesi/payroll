@@ -14,6 +14,6 @@ describe Core::PaymentClassification::Salary do
 
   it 'converts itself to a hash' do
     pc = Core::PaymentClassification::Salary.new(1, 10)
-    pc.to_hash.should == {:type => 'salary', :id => 1, :salary => 10}
+    pc.to_hash.should == {:classification => 'salary', :id => 1, :salary => 10}
   end
 end

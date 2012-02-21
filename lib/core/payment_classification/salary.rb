@@ -10,7 +10,7 @@ module Core
 
       def to_hash
         {
-          :type => 'salary',
+          :classification => 'salary',
           :id => @id,
           :salary => @salary
         }

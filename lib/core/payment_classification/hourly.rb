@@ -10,7 +10,7 @@ module Core
 
       def to_hash
         {
-          :type => 'hourly',
+          :classification => 'hourly',
           :id => @id,
           :rate => @rate
         }

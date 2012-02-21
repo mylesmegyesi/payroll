@@ -1,6 +1,6 @@
-require 'data_store/in_memory/transaction_factory'
+require 'data_store/active_record/transaction_factory'
 
-TRANSACTION_FACTORY = DataStore::InMemory::TransactionFactory.new
+TRANSACTION_FACTORY = DataStore::AR::TransactionFactory.new
 
 Payroll::Application.configure do
 

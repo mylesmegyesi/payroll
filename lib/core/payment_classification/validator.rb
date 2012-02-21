@@ -6,7 +6,7 @@ module Core
 
       def self.validate(pc)
         pc ||= {}
-        am_pc = ActiveModelPC.new(pc[:type], pc[:rate], pc[:salary])
+        am_pc = ActiveModelPC.new(pc[:classification], pc[:rate], pc[:salary])
         am_pc.valid?
         am_pc.errors.to_hash
       end
@@ -15,14 +15,14 @@ module Core
 
       class ActiveModelPC
         include ActiveModel::Validations
-        attr_reader :type, :rate, :salary
+        attr_reader :classification, :rate, :salary
 
-        validates :type, :inclusion => {:in => ['hourly', 'salary', 'commission']}
+        validates :classification, :inclusion => {:in => ['hourly', 'salary', 'commission']}
         validates :rate, :presence => true, :numericality => true, :if => :hourly?
         validates :salary, :presence => true, :numericality => true, :if => :salaried?
 
-        def initialize(type, rate, salary)
-          @type = type
+        def initialize(classification, rate, salary)
+          @classification = classification
           @rate = rate
           @salary = salary
         end
@@ -30,11 +30,11 @@ module Core
         private 
 
         def hourly?
-          @type == 'hourly' || @type == 'commission'
+          @classification == 'hourly' || @classification == 'commission'
         end
 
         def salaried?
-          @type == 'salary' || @type == 'commission'
+          @classification == 'salary' || @classification == 'commission'
         end
       end
     end

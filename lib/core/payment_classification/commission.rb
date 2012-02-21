@@ -11,7 +11,7 @@ module Core
 
       def to_hash
         {
-          :type => 'commission',
+          :classification => 'commission',
           :id => @id,
           :salary => @salary,
           :rate => @rate

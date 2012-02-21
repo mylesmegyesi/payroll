@@ -19,7 +19,7 @@ describe Core::PaymentClassification::Commission do
 
   it 'converts itself to a hash' do
     pc = Core::PaymentClassification::Commission.new(1, '10000', '20')
-    pc.to_hash.should == {:type => 'commission', :id => 1, :salary => '10000', :rate => '20'}
+    pc.to_hash.should == {:classification => 'commission', :id => 1, :salary => '10000', :rate => '20'}
   end
 
 end

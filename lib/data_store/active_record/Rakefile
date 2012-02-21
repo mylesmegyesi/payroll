@@ -1,0 +1,12 @@
+require_relative 'config/fake_application'
+require_relative 'transaction'
+require 'rake'
+
+DataStore::AR::Transaction.ensure_connection_established
+
+FakeApplication.load_tasks
+
+desc 'DB Dance'
+namespace :db do
+  task :dance => ['db:drop', 'db:create', 'db:migrate']
+end

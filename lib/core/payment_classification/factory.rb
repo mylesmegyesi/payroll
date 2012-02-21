@@ -7,7 +7,7 @@ module Core
     class Factory
 
       def self.create(pc)
-        case pc[:type]
+        case pc[:classification]
         when 'hourly'
           Hourly.new(pc[:id], pc[:rate])
         when 'salary'

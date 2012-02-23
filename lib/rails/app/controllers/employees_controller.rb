@@ -6,9 +6,9 @@ class EmployeesController < ApplicationController
 
   def create
     employee = params[:employee] || {}
-    add_employee = Core::Employee::Interactor::Create.new(TRANSACTION_FACTORY)
+    create_employee = Core::Employee::Interactor::Create.new(TRANSACTION_FACTORY)
     begin
-      employee = add_employee.execute(employee)
+      employee = create_employee.execute(employee)
     rescue Core::Error::ValidationError => e
       employee[:errors] = e.errors
     end

@@ -17,9 +17,9 @@ class EmployeesController < ApplicationController
 
   def destroy
     id = params[:id].to_i
-    delete = Core::Employee::Interactor::DeleteByID.new(TRANSACTION_FACTORY)
+    delete_employee = Core::Employee::Interactor::DeleteByID.new(TRANSACTION_FACTORY)
     begin
-      delete.execute(id)
+      delete_employee.execute(id)
       render :json => {:success => true}
     rescue Core::Error::RecordNotFound
       render :json => {:success => false, :message => 'record not found'} 
